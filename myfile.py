@@ -27,7 +27,7 @@ while room != 6:
       elif move == "F":
         room = 3
         print('You can see some money.')
-        pickup = input("Do you want to pick it up (Y/N)").upper()
+        pickup = input("Do you want to pick it up (Y/N)").upper()  
         if pickup == "Y":
           score += 10 # score = score+10
           print("Your score is "+str(score))
@@ -74,3 +74,36 @@ while room != 6:
         
       
 
+#plant url
+
+@startuml
+' config
+hide circle
+
+entity "student" {
+student_id: INTEGER
+--
+first_name: TEXT
+last_name: TEXT
+date_of_birth: DATE
+
+  }
+
+
+entity "class" {
+class_id:PK
+Name: TEXT
+teacher_id: INTEGERS
+level: TEXT
+room: 01
+
+}
+
+note right
+ <b>Note</b>
+ this is the class table it needs to be normilised.
+end note
+
+student ||--{ class : takes
+
+@enduml
