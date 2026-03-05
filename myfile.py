@@ -1,29 +1,11 @@
-@startuml
-' config
-hide circle
-
-entity "student" {
-student_id: INTEGER
---
-first_name: TEXT
-last_name: TEXT
-date_of_birth: DATE
-
-  }
+import sqlite3
+connection = sqlite3.connect("new.db")
+cursor = connection.cursor()
+cursor.execute("SELECT first_name, last_name FROM STUDENT")
 
 
-entity "class" {
-class_id:PK
-Name: TEXT
-teacher_id: INTEGERS
-level: TEXT
-room: 01
-
-}
-
-note right
- <b>Note</b>
- this is the class table it needs to be normilised.
-end note
-
-student ||--{ clas
+students = cursor.fetchall()
+print("ALL students")
+for student in students:
+    print(student[0]+" "+student[1])
+connection.close()

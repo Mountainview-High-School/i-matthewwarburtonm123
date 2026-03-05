@@ -9,4 +9,8 @@ select * from student WHERE first_name = 'Gene';
 
 --3
 
-select * from student WHERE teacher_name 
+select * from student WHERE last_name LIKE "%y";
+
+--4
+
+Select * from Student WHERE room_id = "44"
