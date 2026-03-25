@@ -1,12 +1,10 @@
-md appname
-
-__init__.py
-
-
-
 import os
 
-from flask import Flask
+
+## python -m venv .venv
+from flask import Flask, render_template
+
+
 
 
 def create_app(test_config=None):
@@ -17,6 +15,7 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'database.db'),
     )
 
+
     if test_config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)
@@ -24,17 +23,33 @@ def create_app(test_config=None):
         # load the test config if passed in
         app.config.from_mapping(test_config)
 
+
     # ensure the instance folder exists
     os.makedirs(app.instance_path, exist_ok=True)
 
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
-    
 
+    # a simple page that says hello
+    @app.route('/')
+    def index():
+        return render_template("index.html")
+   
+   
     from . import db
     db.init_app(app)
 
 
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+
+
+
+
+
+
+
     return app
+
+
+
+
